@@ -1,17 +1,15 @@
-import React from 'react'
-import Square from './Square'
+import React from 'react';
+import Square from './Square';
 
-export default function Board(props){
-  
-  const renderSquare=(i)=>{
-    return (
-    <Square value={props.squares[i]}
-    onClick={()=>props.onClick(i)}
+export default function Board(props) {
+  const renderSquare = (i) => (
+    <Square
+      value={props.squares[i]}
+      onClick={() => props.onClick(i)}
     />
-    )
-  }
-    return (
-      <div id="container">
+  );
+  return (
+    <div id="container">
       <div>
         <div className="board-row">
           {renderSquare(0)}
@@ -29,7 +27,6 @@ export default function Board(props){
           {renderSquare(8)}
         </div>
       </div>
-      </div>
-    )
-  
+    </div>
+  );
 }
