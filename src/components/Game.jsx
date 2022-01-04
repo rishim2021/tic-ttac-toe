@@ -13,8 +13,8 @@ export default function Game() {
 
   const handleClick = (i) => {
     const historyPoint = history.slice(0, stepNumber + 1);
-    const current = historyPoint[historyPoint.length - 1];
-    const squares = current.squares.slice();
+    const current2 = historyPoint[historyPoint.length - 1];
+    const squares = current2.squares.slice();
 
     if (calculateWinner(squares) || squares[i]) return;
     squares[i] = xO;
@@ -32,8 +32,8 @@ export default function Game() {
     history.map((_step, move) => {
       const des = move ? ` Go to move  ${move}` : 'Go to start';
       return (
-        <li key={move}>
-          <button onClick={() => jumpTo(move)}>
+        <li>
+          <button type="button" onClick={() => jumpTo(move)}>
             {des}
           </button>
         </li>

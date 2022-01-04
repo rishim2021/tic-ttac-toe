@@ -1,6 +1,5 @@
 import React from 'react';
 import Square from './Square';
-
 export default function Board(props) {
   const renderSquare = (i) => (
     <Square

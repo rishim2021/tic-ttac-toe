@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import './tic.css';
 import Game from './components/Game';
