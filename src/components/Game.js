@@ -4,20 +4,22 @@ import { calculateWinner } from './CalculateWinner';
 
 
   export default function Game() {
-    const [history,setHistory] = useState([Array(9).fill(null)]);
+    const [history,setHistory] = useState([{squares:Array(9).fill(null)}]);
     const [xIsNext,setXIsNext] = useState(true);
-    const [stepNumber,setStepNumber] = useState(0); 
-    const winner = calculateWinner(history[stepNumber]);
+    const [stepNumber,setStepNumber] = useState(0);
+
     const xO = xIsNext ? "X" : "O";
+    const current = history[stepNumber];
+    const winner = calculateWinner(current.squares);
 
     const handleClick=(i)=>{
       const historyPoint = history.slice(0,stepNumber+1);
-      const current = historyPoint[stepNumber];
-      const squares = [...current];
+      const current = historyPoint[historyPoint.length -1 ];
+      const squares = current.squares.slice();
 
-      if(winner || squares[i]) return;
+      if(calculateWinner(squares) || squares[i]) return;
       squares[i] = xO;
-      setHistory(...historyPoint,squares);
+      setHistory(history.concat({squares:squares}));
       setStepNumber(historyPoint.length);
       setXIsNext(!xIsNext);
 
@@ -29,6 +31,7 @@ import { calculateWinner } from './CalculateWinner';
     }
     
     const renderMoves=()=>{
+
       history.map((_step,move)=>{
         const des = move? ` Go to move  ${move}` : "Go to start";
         return(
@@ -40,14 +43,11 @@ import { calculateWinner } from './CalculateWinner';
         )  
       })
     }
-
-    
-    
-  
+ 
       return (
         <div className="game">
           <div className="game-board">
-            <Board squares={history[stepNumber]} onClick={(i)=>handleClick(i)}/>
+            <Board squares={current.squares} onClick={(i)=>handleClick(i)}/>
           </div>
           <div className="game-info">
             <h2>History</h2>
